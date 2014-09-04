@@ -9,6 +9,7 @@ public class BoltImpact : MonoBehaviour {
 		if (other.tag != "Boundary") {
 			Instantiate(impactEffect, transform.position, transform.rotation);
 			Destroy(other);
+			
 		}
 	}
 }
