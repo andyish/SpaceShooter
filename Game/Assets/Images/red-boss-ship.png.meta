@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: 065caccc1bf209c40a0ec7805d6d7584
+guid: 07b39f65fb4f01643bb1255d584629f3
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Communicationship2
-    21300002: boss
+    21300000: red-boss-ship
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -27,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

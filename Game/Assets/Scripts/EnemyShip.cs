@@ -11,15 +11,15 @@ public class EnemyShip : MonoBehaviour {
 		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("LevelController");
 		levelController = gameControllerObject.GetComponent <GameLevelController> ();
 	}
-	
-	void OnTriggerEnter2D(Collider2D other) {
-		health -= 1;
-		levelController.AddScore (1);
+
+	public void InflictDamage() {
+		health--;
 
 		if (health < 1) {
 			Destroy(gameObject);
 			Instantiate(explosion, transform.position, transform.rotation);
 			levelController.AddScore(5);
+			Debug.Log ("EnemyShip");
 		}
 	}
 }

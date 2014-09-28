@@ -7,9 +7,9 @@ public class DestroyByContact : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 
-		if (tag == "Bolt" || other.tag == "Boundry") {
+		if (tag == "Bolt" || other.tag == "Boundry" || other.tag == "EnemyBolt") {
 			Destroy (gameObject);
+			Debug.Log ("DestroyByContact");
 		}
-		//Destroy (other.gameObject);
 	}
 }

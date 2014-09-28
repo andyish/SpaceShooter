@@ -5,7 +5,10 @@ public class DestroyByBoundry : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D other) 
 	{
-		Debug.Log ("OnTriggerExit2D");
-		Destroy (other.gameObject);
+		if (other.tag != "Untagged") {
+			Destroy (other.gameObject);
+			Debug.Log ("DestroyByBoundry: " + other.tag);
+		}
+
 	}
 }

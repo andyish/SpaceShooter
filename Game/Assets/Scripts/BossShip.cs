@@ -4,11 +4,9 @@ using System.Collections.Generic;
 
 public class BossShip : MonoBehaviour {
 	
-	public int health;
 	public GameObject explosion;
 	private GameLevelController levelController;
 
-	
 	public Boundry boundary;
 	//public float tilt;
 	public float dodge;
@@ -24,26 +22,19 @@ public class BossShip : MonoBehaviour {
 	public float fireRate;
 	public float delay;
 	public float speed;
+	public int burstFirst;
 	
 	void Start() {
+		rigidbody2D.velocity = new Vector2(0f, -0.5f);
+
 		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("LevelController");
 		levelController = gameControllerObject.GetComponent <GameLevelController> ();
 		
 		StartCoroutine(Evade());
-		InvokeRepeating ("Fire", delay, fireRate);
+		StartCoroutine (Fire ());
 
-		rigidbody2D.angularVelocity = 30f;
-	}
-
-	void OnTriggerEnter2D(Collider2D other) {
-		health -= 1;
-		levelController.AddScore (1);
-		
-		if (health < 1) {
-			Destroy(gameObject);
-			Instantiate(explosion, transform.position, transform.rotation);
-			levelController.AddScore(500);
-		}
+		rigidbody2D.angularVelocity = 40f;
+		speed = speed * 100;
 	}
 	
 	IEnumerator Evade ()
@@ -70,23 +61,16 @@ public class BossShip : MonoBehaviour {
 
 	}
 
-	void Fire () {		
-		foreach (Transform t in shotSpawn) {
-			GameObject go = (GameObject) Instantiate (shot, t.position, t.rotation);
-			go.rigidbody2D.velocity = new Vector2(0, 1);
-			Rotate(go.rigidbody2D.velocity, t.rotation.z);
+	IEnumerator Fire () {	
+		while (true) {
+			yield return new WaitForSeconds (fireRate);
+			foreach (Transform t in shotSpawn) {
+				for (int i = 0; i < burstFirst; i++) {
+						GameObject go = (GameObject)Instantiate (shot, t.position, t.rotation);
+						go.rigidbody2D.AddForce ((t.localRotation * gameObject.transform.localRotation) * new Vector2 (0, speed));
+						yield return new WaitForSeconds (0.1f);
+				}
+			}
 		}
-
-	}
-
-	Vector2 Rotate(Vector2 v, float degrees) {
-		float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
-		float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
-		
-		float tx = v.x;
-		float ty = v.y;
-		v.x = (cos * tx) - (sin * ty);
-		v.y = (sin * tx) + (cos * ty);
-		return v;
 	}
 }

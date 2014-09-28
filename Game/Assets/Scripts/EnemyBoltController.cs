@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BoltImpact : MonoBehaviour {
+public class EnemyBoltController : MonoBehaviour {
 	
 	public GameObject impactEffect;
 	
@@ -16,11 +16,12 @@ public class BoltImpact : MonoBehaviour {
 	
 	void OnTriggerEnter2D (Collider2D col) {
 		// If it hits an enemy...
-		if (col.tag == "Enemy") {
-			col.gameObject.GetComponent<EnemyShip> ().InflictDamage ();
+		if (col.tag == "Player") {
+			col.gameObject.GetComponent<PlayerController> ().InflictDamage ();
+			
+			OnImpact();
+			Destroy (gameObject);
+			Debug.Log ("EnemyBoltController");
 		}
-		
-		OnImpact();
-		Destroy (gameObject);
 	}
 }
