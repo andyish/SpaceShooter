@@ -1,14 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DestroyByBoundry.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\EvasiveManeuver_Circular.cs">
     <Files>
-      <File FileName="Assets\Scripts\EnemyShip.cs" Line="22" Column="25" />
-      <File FileName="Assets\Scripts\BoltImpact.cs" Line="21" Column="4" />
-      <File FileName="Assets\Scripts\GameLevelController.cs" Line="55" Column="44" />
-      <File FileName="Assets\Scripts\DestroyByBoundry.cs" Line="9" Column="31" />
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="59" Column="75" />
-      <File FileName="Assets\Scripts\BossShip.cs" Line="7" Column="1" />
-      <File FileName="Assets\Scripts\DestroyByContact.cs" Line="12" Column="32" />
+      <File FileName="Assets\EvasiveManeuver_Circular.cs" Line="21" Column="4" />
+      <File FileName="Assets\EvasiveManeuver_Circular.cs" Line="33" Column="1" />
+      <File FileName="Assets\Scripts\EvasiveManeuver.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
