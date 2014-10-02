@@ -1,10 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\EvasiveManeuver_Circular.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\MoveToPosition.cs">
     <Files>
-      <File FileName="Assets\EvasiveManeuver_Circular.cs" Line="21" Column="4" />
-      <File FileName="Assets\EvasiveManeuver_Circular.cs" Line="33" Column="1" />
-      <File FileName="Assets\Scripts\EvasiveManeuver.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MoveToPosition.cs" Line="8" Column="2" />
+      <File FileName="Assets\Scripts\MoveToPosition.cs" Line="45" Column="1" />
+      <File FileName="Assets\Scripts\DestroyByBoundry.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EnemyShip.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\EvasiveManeuver_Circular.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DestroyByContact.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Mover.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\HealthBarController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
