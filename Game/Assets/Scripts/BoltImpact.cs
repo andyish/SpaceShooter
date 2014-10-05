@@ -11,16 +11,16 @@ public class BoltImpact : MonoBehaviour {
 		//Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
 		
 		// Instantiate the explosion where the rocket is with the random rotation.
-		//Instantiate(impactEffect, transform.position, randomRotation);
+		Instantiate(impactEffect, transform.position, transform.rotation);
 	}
 	
 	void OnTriggerEnter2D (Collider2D col) {
 		// If it hits an enemy...
 		if (col.tag == "Enemy") {
 			col.gameObject.GetComponent<EnemyShip> ().InflictDamage ();
+			OnImpact();
+			Destroy (gameObject);
 		}
 		
-		OnImpact();
-		Destroy (gameObject);
 	}
 }

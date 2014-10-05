@@ -13,26 +13,29 @@ public class PlayerController : MonoBehaviour {
 	public int speed;
 	public Boundry bounds;
 	public float fireRate;
-	public GameObject shot;
-	public List<Transform> shotSpawn = new List<Transform>();
+	public Transform shotSpawn;
+	public List<GameObject> shotList = new List<GameObject>();
 	public TextMesh hullText;
-
 	public int maxHull;
+	public GameLevelController gameController;
+	
+	private GameObject shot;
 	private int currentHull;
-
 	private float nextFire;
+	private int weaponLevel;
 
 	void Start() {
 		currentHull = maxHull;
 		UpdateHull ();
+		weaponLevel = 0;
+		shot = shotList[weaponLevel];
 	}
 
 	void Update() {
 		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
 
-			foreach(Transform t in shotSpawn)
-				Instantiate(shot, t.position, t.rotation);
+			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
 		}
 	}
 
@@ -47,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 		(
 			Mathf.Clamp (rigidbody2D.position.x, bounds.xMin, bounds.xMax),
 			Mathf.Clamp (rigidbody2D.position.y, bounds.yMin, bounds.yMax)
-		);
+		);				
 	}
 
 	public void InflictDamage() {
@@ -57,6 +60,14 @@ public class PlayerController : MonoBehaviour {
 		if (currentHull < 1) {
 			//GameOver
 			Destroy(this);
+			gameController.GameOver();
+		}
+	}
+	
+	public void WeaponUpgrade() {
+		weaponLevel++;
+		if(weaponLevel < shotList.Count) {
+			shot = shotList[weaponLevel];
 		}
 	}
 	
