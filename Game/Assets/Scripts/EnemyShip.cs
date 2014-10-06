@@ -19,7 +19,6 @@ public class EnemyShip : MonoBehaviour {
 			Destroy(gameObject);
 			Instantiate(explosion, transform.position, transform.rotation);
 			levelController.AddScore(5);
-			Debug.Log ("EnemyShip");
 		}
 	}
 }

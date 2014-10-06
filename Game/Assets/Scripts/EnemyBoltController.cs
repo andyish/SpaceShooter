@@ -20,7 +20,6 @@ public class EnemyBoltController : MonoBehaviour {
 			
 			OnImpact();
 			Destroy (gameObject);
-			Debug.Log ("EnemyBoltController");
 		}
 	}
 }

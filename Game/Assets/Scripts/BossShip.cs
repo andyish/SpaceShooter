@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class BossShip : MonoBehaviour {
 	
 	public GameObject explosion;
-	private GameLevelController levelController;
 
 	public Boundry boundary;
 	//public float tilt;
@@ -28,7 +27,6 @@ public class BossShip : MonoBehaviour {
 		rigidbody2D.velocity = new Vector2(0f, -0.5f);
 
 		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("LevelController");
-		levelController = gameControllerObject.GetComponent <GameLevelController> ();
 		
 		StartCoroutine(Evade());
 		StartCoroutine (Fire ());
@@ -57,8 +55,7 @@ public class BossShip : MonoBehaviour {
 			(
 				Mathf.Clamp(rigidbody2D.position.x, boundary.xMin, boundary.xMax), 
 				Mathf.Clamp(rigidbody2D.position.y, boundary.yMin, boundary.yMax)
-				);
-
+			);
 	}
 
 	IEnumerator Fire () {	
@@ -66,9 +63,9 @@ public class BossShip : MonoBehaviour {
 			yield return new WaitForSeconds (fireRate);
 			foreach (Transform t in shotSpawn) {
 				for (int i = 0; i < burstFirst; i++) {
-						GameObject go = (GameObject)Instantiate (shot, t.position, t.rotation);
-						go.rigidbody2D.AddForce ((t.localRotation * gameObject.transform.localRotation) * new Vector2 (0, speed));
-						yield return new WaitForSeconds (0.1f);
+					GameObject go = (GameObject)Instantiate (shot, t.position, t.rotation);
+					go.rigidbody2D.AddForce ((t.localRotation * gameObject.transform.localRotation) * new Vector2 (0, speed));
+					yield return new WaitForSeconds (0.1f);
 				}
 			}
 		}

@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
 	public TextMesh hullText;
 	public int maxHull;
 	public GameLevelController gameController;
+	public GameObject explosion;
 	
 	private GameObject shot;
 	private int currentHull;
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour {
 	private int weaponLevel;
 
 	void Start() {
+		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("LevelController");
+		gameController = gameControllerObject.GetComponent <GameLevelController> ();
+
 		currentHull = maxHull;
 		UpdateHull ();
 		weaponLevel = 0;
@@ -32,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
+		if (Input.GetKey (KeyCode.Space) && Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
 
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
@@ -58,9 +62,11 @@ public class PlayerController : MonoBehaviour {
 		UpdateHull ();
 
 		if (currentHull < 1) {
-			//GameOver
-			Destroy(this);
 			gameController.GameOver();
+			rigidbody2D.velocity = new Vector2(0, 0);
+			
+			Instantiate(explosion, transform.position, Quaternion.identity);
+			Destroy(this);
 		}
 	}
 	

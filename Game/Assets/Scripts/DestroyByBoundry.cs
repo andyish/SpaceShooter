@@ -7,7 +7,6 @@ public class DestroyByBoundry : MonoBehaviour {
 	{
 		if (other.tag != "Untagged") {
 			Destroy (other.gameObject);
-			Debug.Log ("DestroyByBoundry: " + other.tag);
 		}
 
 	}

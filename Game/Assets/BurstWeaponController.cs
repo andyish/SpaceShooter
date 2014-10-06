@@ -21,7 +21,7 @@ public class BurstWeaponController : MonoBehaviour {
 		yield return new WaitForSeconds (delay);
 		
 		for(int i = 0; i < burstCount; i++) {
-			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+			Instantiate(shot, shotSpawn.position, Quaternion.LookRotation(shot.transform.forward));
 			yield return new WaitForSeconds (fireRate);
 		}
 	}
