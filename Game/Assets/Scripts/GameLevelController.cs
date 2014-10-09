@@ -23,13 +23,16 @@ public class GameLevelController : MonoBehaviour {
 		gameOverText.text = "";
 		
 		UpdateScore ();
-		StartCoroutine (SpawnWaves ());
+		StartCoroutine (SpawnSideFighters ());
+		StartCoroutine (SpawnTopDown ());
 	}
 	
 	void Update () {
 		if (restart) {
 			if (Input.GetKeyDown (KeyCode.R)) {
 				Application.LoadLevel (Application.loadedLevel);
+			} else if(Input.GetKeyDown (KeyCode.Q)) {
+				Application.LoadLevel ("MainMenu");
 			}
 		}
 	}
@@ -38,22 +41,69 @@ public class GameLevelController : MonoBehaviour {
 		scoreCounter += score;
 		UpdateScore ();
 	}
-
-	IEnumerator SpawnWaves ()
+	
+	
+	IEnumerator SpawnTopDown ()
 	{
-		yield return new WaitForSeconds (5);
+		yield return new WaitForSeconds (2);
+		
+		for(int i = 0; i < 10; i++) {
+			if(gameOver) {
+				break;
+			}
+			
+			Vector2 spawnPosition = new Vector2(Random.Range(-7, 7), 11);
+			
+			GameObject enemy =(GameObject) Instantiate(hazards[2], spawnPosition, Quaternion.identity);
+			enemy.transform.Rotate(0, 0, 180);
+			Mover mover = enemy.GetComponent<Mover>();
+			mover.xVelocity = 0f;
+			mover.yVelocity = -3f;
+			
+			yield return new WaitForSeconds (Random.Range(0.9f, 1.8f));
+		}
+		
+		yield return new WaitForSeconds (3);
+	}
+		
 
-		for(;;) {
+	IEnumerator SpawnSideFighters ()
+	{
+		yield return new WaitForSeconds (4);
+
+		float yPos = 5f;
+		bool up = true;
+		for(int i = 0; i < 50; i++) {
 			if(gameOver) {
 				break;
 			}
 		
-			GameObject hazard = hazards[Random.Range(0, hazards.Length)];
-			Vector2 spawnPosition = new Vector2(Random.Range(-5, 5), hazard.transform.position.y);
-			Instantiate (hazard, spawnPosition, Quaternion.identity);
+			Vector2 spawnPosition = new Vector2(-9, yPos);
 			
-			yield return new WaitForSeconds (waveWait);
+			if(up && yPos > 9) {
+				up = false;
+			} else if (!up && yPos < 3) {
+				up = true;
+			}
+			
+			if(up) 
+				yPos += 0.75f;
+			else
+				yPos -= 0.75f;
+				
+			GameObject enemy =(GameObject) Instantiate(hazards[2], spawnPosition, Quaternion.identity);
+			enemy.transform.Rotate(0, 0, 270);
+			Mover mover = enemy.GetComponent<Mover>();
+			mover.xVelocity = 4f;
+			mover.yVelocity = 0f;
+			
+			yield return new WaitForSeconds (0.6f);
 		}
+		
+		yield return new WaitForSeconds (3);
+		
+		//Complete
+		Completed();
 	}
 
 	void UpdateScore() {
@@ -70,5 +120,13 @@ public class GameLevelController : MonoBehaviour {
 		restartText.text = "Press R to restart game";
 		gameOver = true;
 		restart = true;
+	}
+	
+	void Completed () {
+		if(!gameOver) {
+			gameOverText.text = "Complete!";
+			restartText.text = "Press R to play again or Q to quit";
+			restart = true;
+		}
 	}
 }
